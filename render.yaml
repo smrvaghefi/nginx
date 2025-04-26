@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: tabpy-proxy
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: RENDER_EXTERNAL_URL
+        value: https://tabpy-r8n8.onrender.com
+    healthCheckPath: /
+
+  - type: web
+    name: tabpy
+    env: docker
+    repo: https://github.com/Admin/smrvaghefi/tabpy 
+    dockerCommand: python tabpy.py
+    plan: free
+    ports:
+      - 9004
+    envVars:
+      - key: TABPY_USER
+        value: Admin
+      - key: TABPY_PASSWORD
+        value: Admin
